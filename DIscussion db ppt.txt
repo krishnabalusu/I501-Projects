@@ -1,0 +1,38 @@
+Levels of data=
+*)open data
+------------
+1)Closed data
+--------------
+*)it is the first level of data in open data
+*)in this stage,Closed data refers to information that is highly restricted in terms of access, limiting its availability only to authorized individuals or systems within a specific organization. This level of data is typically kept confidential or proprietary, and access is tightly controlled to maintain security and confidentiality.
+ex=
+1)Internal corporate databases containing financial records, employee information, or trade secrets.
+2)Classified government databases with national security information.
+2)restricted data
+-------------------
+Restricted data represents the second level in the spectrum of openness, where access is granted to a limited audience or under specific conditions. While not as tightly controlled as closed data, restricted data maintains certain limitations on its accessibility, often due to privacy concerns, licensing agreements, or security considerations.
+ex=
+Research datasets with sensitive information that can be accessed by approved researchers under strict guidelines.
+3)shared data
+---------------
+Shared data represents the third level in the spectrum of openness, indicating a higher degree of accessibility compared to restricted data. In this level, data is shared more openly with a broader audience, encouraging collaboration and utilization for various purposes. While not entirely open to the public, shared data allows a wider group of users to access and benefit from the information.
+ex=
+Government datasets made available to approved researchers, businesses, and non-profit organizations for analysis and application development.
+Scientific datasets shared among research institutions to foster collaborative research.
+4)open data=
+-------------
+Open data represents the fourth and most open level in the spectrum of data accessibility. In this level, data is made fully open to the public, promoting transparency, innovation, and unrestricted use. Open data follows the principles of being easily accessible, usable, and redistributable without limitations.
+Example:
+
+Government census data released to the public for anyone to download, use, and analyze.
+Scientific research findings published openly, allowing researchers worldwide to access and build upon the knowledge.
+5)machine readable data
+-----------------------------
+Machine-readable open data represents the fifth level in the spectrum of data accessibility. In this level, the focus is not only on openness but also on the format in which the data is presented. Machine-readable formats enable automated processing, analysis, and utilization of data without human intervention, enhancing the efficiency and scalability of data use.
+Structured Formats: Data is presented in structured formats that can be easily processed by machines, such as CSV, JSON, or XML.
+Metadata Inclusion: Information about the data, known as metadata, is included, providing context and aiding in automated understanding.
+Standardized Schemas: Data adheres to standardized schemas, facilitating consistency and interoperability across different datasets.
+ex=
+Publishing government budget data in a machine-readable format like CSV, allowing automated analysis and comparison.
+Providing scientific research datasets with standardized metadata in JSON format for easy integration into data-driven applications.
+
