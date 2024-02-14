@@ -1,0 +1,4 @@
+Statistics for data science=
+1)DOTPLOT=It is easier to compare freq of various categories
+2)piechart=allows more easily to know about what fraction of it corresponds to
+3)barplot=

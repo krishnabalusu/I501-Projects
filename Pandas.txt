@@ -1,0 +1,20 @@
+PANDAS
+------------
+A library used to work with tabular data
+*)pd.options.display.max_rows=100 used to display 100 rows
+usually by default it displays 60 rows and 20 columns
+*)name=pd.read_csv used to read the file
+*)to display first 10 rows datasetname.head(10) and head gives default 5 rows
+*)for last datasetname.tail(10)
+*)for sample rows datasetname.sample(number)
+*)datasetname.shape
+*)datasetname.dtypes used to give datatypes
+*)datasetname.describe used to describe mean median, freq and all
+TO DROP=
+*)datasetname.drop(columnname or index num or any)
+ISNA AND NOTNA=
+used to check for missing values
+To add index or label=
+df=pd.Series(datasetname, index=['1','2','2']
+*)to convert dataset to dataframe=
+df=pd.DataFrame(dataset_name)
