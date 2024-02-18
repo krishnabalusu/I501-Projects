@@ -1,15 +1,12 @@
 from dotenv import load_dotenv
 import pandas as pd
-from tqdm import tqdm
-import multiprocessing
-import os
 import requests
 
-def env_load():
+def load_environment():
     load_dotenv()
     return os.environ['ACCESS_TOKEN']
 
-def genius(search_term, access_token, per_page=15):
+def search_genius(search_term, access_token, per_page=15):
     try:
         genius_search_url = f"http://api.genius.com/search?q={search_term}&" + \
                             f"access_token={access_token}&per_page={per_page}"
@@ -20,10 +17,10 @@ def genius(search_term, access_token, per_page=15):
         print(e)
         return []
 
-def genius_to_df(search_term, access_token, n_results_per_term=10):
+def search_genius_to_df(search_term, access_token, n_results_per_term=10):
     try:
-        print(f"Processing iteration for item: {search_term} in process {os.getpid()}")
-        json_data = genius(search_term, access_token, per_page=n_results_per_term)
+        print(f"Processing iteration for item: {search_term}")
+        json_data = search_genius(search_term, access_token, per_page=n_results_per_term)
         hits = [hit['result'] for hit in json_data]
         df = pd.DataFrame(hits)
 
@@ -40,38 +37,20 @@ def genius_to_df(search_term, access_token, n_results_per_term=10):
         print(e)
         return pd.DataFrame()
 
-def process_wrapper(queue, access_token, item):
-    try:
-        result = genius_to_df(item, access_token)
-        queue.put(result)
-    except Exception as e:
-        print(f"Error in process {os.getpid()} for item {item}: {e}")
-
 def save_to_csv(df_list):
     res_df = pd.concat(df_list)
-    res_df.to_csv('genius_output.csv', index=False, header=True)
+    res_df.to_csv('genius_output_1.csv', index=False, header=True)
 
-if __name__ == "__main__":
+if '_name_' == "_main_":
     try:
         dfs = []
-        processes = []
-        result_queue = multiprocessing.Queue()
-        access_token = env_load()
-        search_terms = ['Shadows of Intent', 'Cigarettes After Sex', 'The 1975', 'Slowdive', 'Deftones', 'Loathe', 'Joji', 'Invent Animate', 'Currents', 'Ne Obliviscaris']
+        access_token = load_environment()
+        search_terms = ['Anirudh', 'A R Rahman', 'Arjit Singh', 'Ravi Shankar', 'Armaan Malik', 'Devi sri prasad', 'Mani Sharma', 'Revanth', 'Geetha Maduri', 'Thaman']
 
-        for item in tqdm(search_terms):
-            process = multiprocessing.Process(target=process_wrapper, args=(result_queue, access_token, item))
-            processes.append(process)
-            process.start()
+        for item in search_terms:
+            df = search_genius_to_df(item, access_token)
+            dfs.append(df)
 
-        for process in processes:
-            process.join(timeout=30)   
-
-        df_list = []
-        while not result_queue.empty():
-            print("in")
-            df_list.append(result_queue.get())
-
-        save_to_csv(df_list)
+        save_to_csv(dfs)
     except Exception as e:
         print(e)
