@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import pandas as pd
 import requests
+import os
 
 def load_environment():
     load_dotenv()
@@ -15,7 +16,6 @@ def search_genius(search_term, access_token, per_page=15):
         return json_data['response']['hits']
     except Exception as e:
         print(e)
-        return []
 
 def search_genius_to_df(search_term, access_token, n_results_per_term=10):
     try:
@@ -39,18 +39,18 @@ def search_genius_to_df(search_term, access_token, n_results_per_term=10):
 
 def save_to_csv(df_list):
     res_df = pd.concat(df_list)
+    print(res_df.head())
     res_df.to_csv('genius_output_1.csv', index=False, header=True)
 
-if '_name_' == "_main_":
-    try:
-        dfs = []
-        access_token = load_environment()
-        search_terms = ['Anirudh', 'A R Rahman', 'Arjit Singh', 'Ravi Shankar', 'Armaan Malik', 'Devi sri prasad', 'Mani Sharma', 'Revanth', 'Geetha Maduri', 'Thaman']
+try:
+    dfs = []
+    access_token = load_environment()
+    search_terms = ['Anirudh', 'A R Rahman', 'Arjit Singh', 'Ravi Shankar', 'Armaan Malik', 'Devi sri prasad', 'Mani Sharma', 'Revanth', 'Geetha Maduri', 'Thaman']
 
-        for item in search_terms:
-            df = search_genius_to_df(item, access_token)
-            dfs.append(df)
+    for item in search_terms:
+        df = search_genius_to_df(item, access_token)
+        dfs.append(df)
 
-        save_to_csv(dfs)
-    except Exception as e:
-        print(e)
+    save_to_csv(dfs)
+except Exception as e:
+    print(e)
